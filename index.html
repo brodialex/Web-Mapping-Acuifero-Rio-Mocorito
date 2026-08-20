@@ -1,0 +1,153 @@
+ <!--
+ Omar Alejandro mendoza Aguilar
+ SIG web del Acuifero de Mocorito 
+ Maestria en Ciencias de la Ingeniería
+ 
+ construcción del mapa
+ -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SIG-Cuenca_Culiacán</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+ 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous"><link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css" />
+    <!--[if lte IE 8]><link rel="stylesheet" href="//cdn.leafletjs.com/leaflet-0.7.2/leaflet.ie.css" /><![endif]-->
+    <link rel="stylesheet" href="css/leaflet-sidebar.css" />
+    <link rel="stylesheet" href="css/leaflet-side.css" />
+    <link rel="stylesheet" href="css/styl.css" />
+        
+                           <!--Data-->
+                           
+        <script type="text/javascript" src="data/AcuiferoM.js"></script>
+        <script type="text/javascript" src="data/ClasifiM13.js"></script>
+        <script type="text/javascript" src="data/ClasifiM22.js"></script>  
+        <script type="text/javascript" src="data/PuntosdeICA.js"></script>
+    	<script type="text/javascript" src="data/a_mcpsinaloa.js"></script> 
+        <script type="text/javascript" src="data/ICAS_Mocorito_Buff.js"></script> 	
+        <script type="text/javascript" src="data/l_rios_princp.js"></script>
+        <script type="text/javascript" src="data/lang.js"></script>
+        <script type="text/javascript" src="data/pes.js"></script>
+        <script src="leaflet.groupedlayercontrol.js"></script>
+        <link rel="stylesheet" href="leaflet.groupedlayercontrol.css" />
+  
+                       <!--[cluster-->
+                             
+        <script src="js/leaflet.browser.print.js"></script>
+        <script src="js/leaflet.browser.print.utils.js"></script>
+        <script src="js/leaflet.browser.print.sizes.js"></script>
+
+        <script type="text/javascript" src="js/leaflet.markercluster.js"></script>
+        <link rel="stylesheet" href="js/MarkerCluster.css" />
+        <link rel="stylesheet" href="js/MarkerCluster.Default.css" />
+        <script type="text/javascript" src="js/jquery.js"></script>
+		<script type="text/javascript" src="js/leaflet.js"></script>
+        <script type="text/javascript" src="js/lightbox.js" > </script>
+        <link rel="stylesheet" href="css/lightbox.css" />
+      
+        <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+                      
+        <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+		<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+
+
+</head>
+<body>
+    <div id="sidebar" class="sidebar collapsed">
+        <!-- Nav tabs -->
+
+       <div class="sidebar-tabs">
+            <ul role="tablist">
+                <li><a href="#vrstvy" role="tab"><i class="fa fa-bars"></i></a></li>
+                <li><a href="javascript:Abrir()" role="tab"><i class="fas fa-tree"></i></a></li>
+                <li><a href="javascript:Abrir_co()" role="tab"><i class="fab fa-envira"></i></a></li>
+                <li><a href="javascript:Abrir_us()" role="tab"><i class="fas fa-info"></i></a></li>
+            </ul>
+        </div>
+
+        <!-- Tab panes -->
+
+        <div class="sidebar-content">
+            <div class="sidebar-pane" id="vrstvy">
+                <h1 class="sidebar-header" id="tlac">Capas<span class="sidebar-close"><i class="fa fa-caret-left"></i></span></h1><img href="img/figura1.png">
+                <div id="seznamvrstev"> 
+
+                </div>    
+            </div>
+ 
+        </div>
+    </div>
+
+        <div class="side" id="vent_us" style=" z-index: 9999;" >
+            <div id="close_win"><a href="javascript:cerrar_us()"><i class="fas fa-times"></i></a></div>
+                 <h1>Acerca de este proyecto</h1>
+                  <p>Este es un proyecto desarrollado en el tecnológico Nacional de México, Instituto tecnológico de Culiacán como parte del proceso de titulación del programa de maestría en ciencias de la ingeniería, con apoyo de investigadores asignados como cátedras por parte de Concejo Nacional de Ciencia y Tecnología (CONACyT - Proyecto 2572). </p>
+                <p><strong>Omar Alejandro Mendoza Aguilar</strong></p>
+                <p>Email: Omar.MA@Culiacan.Tecnm.mx</p>
+        </div>
+
+        <div class="side" id="vent_co">
+            <div id="close_win"><a href="javascript:cerrar_co()"><i class="fas fa-times"></i></a></div>
+                 <h1>Capacidad de Captura de CO<sub>2</sub> en la cuenca de río Culiacán</h1>
+                  <p>Lorem ipsum dolor sit amet consectetur adipiscing elit pulvinar, euismod litora aenean urna in feugiat ridiculus ac, habitant luctus convallis proin dapibus eu eleifend, gravida justo interdum vehicula inceptos et nec. Interdum inceptos hac etiam vulputate parturient torquent erat curabitur mollis elementum, eros himenaeos vestibulum nibh neque dictumst vivamus lacus fusce, primis sem nostra felis urna nulla bibendum tempus rutrum. Sollicitudin egestas convallis vestibulum dis felis sociis quam tempor feugiat, dignissim mauris duis in nostra potenti venenatis ad eleifend, facilisis scelerisque fringilla ultrices luctus enim phasellus platea. </p>
+        </div>
+
+       <div class="side" id="vent">
+            <div id="close_win"><a href="javascript:cerrar()"><i class="fas fa-times"></i></a></div>
+                <h1>Clasificación de uso de suelo y cambio de uso de suelo 2013 - 2022</h1>
+                <a class="example-image-link" href="img/matriz_cruzada.png" data-lightbox="example-1" data-title="Matriz cruzada 1990-2019"><img id="vent_win" class="example-image" src="img/matriz_cruzada.png" alt="image-1" /></a>
+                <p>En un análisis general, se puede observar como la matriz de transición de uso de suelo muestra que las clases <strong>Agrícola Permanente</strong>, <strong>Pastizal</strong>, <strong>Agrícola Temporal</strong>, <strong>Cuerpo de Agua</strong>, <strong>Manglar</strong> y <strong>Bosque</strong> conservaron una proporción importante de su superficie durante el periodo <strong>2013–2022</strong>, lo que se refleja en los valores predominantes de la diagonal principal de la matriz. Entre ellas, <strong>Agrícola Permanente</strong> presentó la mayor estabilidad, manteniendo <strong>99,058.95 ha</strong>, seguida de <strong>Pastizal</strong> con <strong>79,737.39 ha</strong>, <strong>Agrícola Temporal</strong> con <strong>58,823.35 ha</strong>, <strong>Cuerpo de Agua</strong> con <strong>42,145.83 ha</strong>, <strong>Manglar</strong> con <strong>10,642.05 ha</strong> y <strong>Bosque</strong> con <strong>4,091.31 ha</strong>. Estos resultados indican que dichas coberturas conservaron gran parte de su extensión original durante el periodo de estudio.</p>
+
+<p>No obstante, la matriz también evidencia cambios importantes entre algunas categorías. <strong>Agrícola Temporal</strong> presentó una transición considerable hacia <strong>Pastizal</strong> (<strong>33,880.01 ha</strong>) y <strong>Agrícola Permanente</strong> (<strong>6,983.10 ha</strong>), lo que refleja procesos de conversión y reorganización de las actividades productivas. De manera similar, la categoría <strong>Selva</strong> experimentó una reducción importante de su superficie, con transiciones principalmente hacia <strong>Pastizal</strong> (<strong>6,020.46 ha</strong>) y <strong>Agrícola Temporal</strong> (<strong>2,552.85 ha</strong>), lo que sugiere una sustitución gradual de la vegetación natural por usos agropecuarios.</p>
+
+<p>De igual manera, <strong>Matorral</strong> registró cambios hacia <strong>Pastizal</strong> (<strong>2,365.11 ha</strong>) y <strong>Manglar</strong> (<strong>282.24 ha</strong>), mientras que la categoría <strong>Acuícola</strong> mostró una expansión sobre áreas previamente ocupadas por <strong>Manglar</strong> (<strong>1,696.86 ha</strong>), <strong>Matorral</strong> (<strong>1,694.92 ha</strong>) y <strong>Selva</strong> (<strong>1,284.93 ha</strong>). En conjunto, estos resultados indican que las mayores transformaciones ocurrieron en las clases de <strong>Selva</strong>, <strong>Agrícola Temporal</strong>, <strong>Matorral</strong> y <strong>Manglar</strong>, mientras que <strong>Agrícola Permanente</strong>, <strong>Pastizal</strong>, <strong>Cuerpo de Agua</strong> y <strong>Bosque</strong> fueron las coberturas con mayor permanencia, reflejando una dinámica de cambio de uso del suelo caracterizada por la expansión de las actividades agrícolas y acuícolas sobre coberturas naturales.</p>
+
+
+                <a class="example-image-link" href="img/valores_transicion.png" data-lightbox="example-1" data-title="Valores de transición"><img id="vent_win" class="example-image" src="img/valores_transicion.png" alt="image-1"/></a>
+                <p>En términos generales, los resultados muestran que las categorías <strong>Acuícola</strong>, <strong>Agrícola Permanente</strong> y <strong>Agrícola Temporal</strong> registraron los mayores incrementos durante el periodo <strong>2013–2022</strong>, presentando cambios netos positivos de <strong>5,752.14 ha</strong>, <strong>47,338.74 ha</strong> y <strong>17,244.14 ha</strong>, respectivamente. En particular, la categoría <strong>Agrícola Permanente</strong> mostró el mayor crecimiento, con un incremento del <strong>73.09 %</strong>, mientras que <strong>Acuícola</strong> registró el mayor porcentaje de cambio, con <strong>77.62 %</strong>, lo que refleja la expansión de las actividades productivas en la región.</p>
+
+<p>Por otra parte, las mayores pérdidas se presentaron en las coberturas naturales de <strong>Selva</strong>, <strong>Matorral</strong> y <strong>Pastizal</strong>, con cambios netos de <strong>-27,670.50 ha</strong>, <strong>-25,541.44 ha</strong> y <strong>-7,221.51 ha</strong>, respectivamente. También se registraron reducciones en las categorías <strong>Cuerpo de Agua</strong>, <strong>Manglar</strong>, <strong>Sin Vegetación Aparente</strong>, <strong>Tular</strong> y <strong>Urbano</strong>, aunque con diferentes niveles de pérdida.</p>
+
+<p>En conjunto, estos resultados evidencian una tendencia hacia la expansión de las superficies destinadas a actividades <strong>agrícolas</strong> y <strong>acuícolas</strong>, en sustitución  de coberturas naturales como la <strong>Selva</strong>, el <strong>Matorral</strong> y el <strong>Pastizal</strong>. Este comportamiento refleja una dinámica de transformación del uso del suelo caracterizada por el reemplazo progresivo de ecosistemas naturales por áreas de aprovechamiento productivo durante el periodo de estudio.</p>
+
+
+                <p>Puede solicitar mas informacion de este estudio <a href="javascript:Abrir_us()"><i class="fas fa-info"></i></a></p>
+        </div>
+    <div id="map" class="sidebar-map"></div>
+    <img src="img/titulo.png" width="28%" style="background:rgba(255,255,255,0.5); position: absolute; box-shadow: 2px 2px 5px 3px rgba(0, 0, 0, .2); border-radius: 15px 15px 15px 15px; left: 27%; bottom: 2%; z-index: 9999;" >
+   
+    <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw==" crossorigin=""></script>
+
+    <script src="js/leaflet-sidebar.js"></script>
+    <script src="js/leaflet-side.js"></script>
+    <script src="leaflet.groupedlayercontrol.js"></script>
+                              
+	<script src="https://cdn.jsdelivr.net/npm/leaflet-easybutton@2/src/easy-button.js"></script>
+    <script src="js/leaflet.browser.print.js"></script>
+    <script src="js/leaflet.browser.print.utils.js"></script>
+    <script src="js/leaflet.browser.print.sizes.js"></script>
+
+	<link rel="stylesheet" href="js/Control.MiniMap.css" />
+	<script src="js/Control.MiniMap.js" type="text/javascript"></script>
+
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="js/leaflet-openweathermap.css" />
+	<script type="text/javascript" src="js/leaflet-openweathermap.js"> </script>
+
+  	<script type="text/javascript" src="js/leaflet.markercluster.js"></script>
+    <link rel="stylesheet" href="js/MarkerCluster.css" />
+    <link rel="stylesheet" href="js/MarkerCluster.Default.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+	<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+
+	<script type="text/javascript" src="js/lightbox.js" > </script>
+    <link rel="stylesheet" href="css/lightbox.css" />
+    <script src="mapa.js"></script>                             
+  
+ 
+    
+</body>
+</html>
+     
+        
