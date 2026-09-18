@@ -8,7 +8,7 @@ var map = new L.map('map', {
     zoom: 10,
     maxZoom: 18,
     zoomControl: false, 
-    layers: pod
+    layers: []
 });
   L.control.zoom({
      position:'topright'
@@ -206,46 +206,18 @@ function getColor4(d){
 //<!--fin de capas--> 
 
              //mapas base
-              
-                var minis=L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
-      	maxZoom: 18,
-      	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'});
-        
-              
-              var pod=L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
-      	maxZoom: 18,
-      	attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'});
-        pod;//addTo(map);
-          
-        
-              var mapycz2 =  L.tileLayer('http://m{s}.mapserver.mapy.cz/base-m/{z}-{x}-{y}',{ident:'mapycz',attribution:'&copy;Seznam.cz a.s., | &copy;OpenStreetMap <a href="http://mapy.cz"><img class="print" target="_blank" src="//api.mapy.cz/img/api/logo.png" style="cursor: pointer; position:relative;top: 5px;"></a>',maxZoom:20,subdomains:"1234"});
-              var baseMap = new L.TileLayer('http://{s}.tiles.mapbox.com/v3/gvenech.m13knc8e/{z}/{x}/{y}.png'); 
-              var mapycz =  L.tileLayer('http://m{s}.mapserver.mapy.cz/base-m/{z}-{x}-{y}',{ident:'mapycz',attribution:'&copy;Seznam.cz a.s., | &copy;OpenStreetMap <a href="http://mapy.cz"><img class="print" target="_blank" src="//api.mapy.cz/img/api/logo.png" style="cursor: pointer; position:relative;top: 5px;"></a>',maxZoom:20,subdomains:"1234"});   
-              var esri_img = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
-		  		attribution: 'Tiles &copy; &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'
-				}).addTo(map);
-
-
+            const MAPY_API_KEY = 'kpbDpzVGYTr9myCHYNUWgWsRRxBvD3OvZu6-HLVx8tQ';
+            var minis = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',{maxZoom: 19,attribution: 'Tiles &copy; Esri'});
+            var pod = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',{maxZoom: 17,attribution: 'Map data &copy; OpenStreetMap contributors, SRTM | Map style &copy; OpenTopoMap'});
+			var baseMap = new L.TileLayer('http://{s}.tiles.mapbox.com/v3/gvenech.m13knc8e/{z}/{x}/{y}.png'); 
+            var esri_img = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {attribution: 'Tiles &copy; &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community'}).addTo(map);
+	        var mapycz = L.tileLayer('https://api.mapy.com/v1/maptiles/basic/256/{z}/{x}/{y}?apikey=' + MAPY_API_KEY, { maxZoom: 20, attribution: '&copy; Seznam.cz a.s. &copy; OpenStreetMap' });
             var prec= L.OWM.precipitationClassic = L.OWM.precipitationClassic({showLegend: false, opacity: 0.5,appId: '8b816162ce03197c15265e47b0149f36'});
             var city = L.OWM.current({intervall: 5,showOwmStationLink: true,minZoom:2, lang: 'es', appId:"8b816162ce03197c15265e47b0149f36"});
-   
-    var baseMaps = {
-    "OSM" : pod,
-    "<b style=color:red;>M</b><b style=color:black;>APY.CZ":mapycz,
-    "Satelite": esri_img
-    };
+    		var baseMaps = { "OTM" : pod,  "<b style=color:red;>M</b><b style=color:black;>APY.CZ":mapycz, "Satelite": esri_img  };
+            var groupedOverlays = { "<b style=color:rgb(220,31,37);>Clasificación de Uso de Suelo</b>": { "Uso de suelo 2013": geojson2, "Uso de suelo 2022</br></br><img src='img/leyenda1.png' height=180px  style= 'margin-left: 25px'>": geojson4, },
 
-    var groupedOverlays = {                                                              
-    "<b style=color:rgb(220,31,37);>Clasificación de Uso de Suelo</b>": {
-    
-    "Uso de suelo 2013": geojson2,//omar
-    
-    "Uso de suelo 2022</br></br><img src='img/leyenda1.png' height=180px  style= 'margin-left: 25px'>": geojson4,//omar 2 8
-  },
-
- // "<b style=color:rgb(220,31,37);>Simulación de Cambio de Uso de Suelo</b> <br>": {
-  //  "Mapa de Simulacion 2049": geojson4,
-  //},
+  
  
   "<b style=color:rgb(220,31,37);>Capas de Interes</b> <br>": {
     "Municipios": geojson1,
